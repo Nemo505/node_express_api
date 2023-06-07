@@ -6,3 +6,5 @@ router.get('/', (req, res, next) => {
         message: 'Order Detail'
     });
 });
+
+module.exports = router;

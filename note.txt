@@ -1,0 +1,11 @@
+npm init
+npm install --save express
+server.js
+app.js
+npm install --save-dev nodemon
+start: "node server.js"
+
+loginPackage
+    npm install --save morgan
+To be in format/readable
+    npm install --save body-parser
