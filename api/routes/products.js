@@ -5,10 +5,36 @@ const mongoose = require('mongoose');
 const Product = require('../models/product')
 
 router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'Get product request'
-    });
+    Product.find()
+    .select('name price _id')
+    .exec()
+    .then(result => {
+        console.log(result);
+        const addResult = {
+            count: result.length,
+            products: result
+
+            //OR
+            //products: result.map(p => {
+               // return {
+                    //name: p.name,
+                    //price: p.price,
+                    //_id: p.id,
+                    //request: {
+                        //type: 'GET,
+                        //url: 'http..../products/'+p._id
+                   // }
+              // }
+            //})
+        }
+        res.status(200).json(addResult);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+   });
 });
+
 
 router.post('/', (req, res, next)=> {
     const product = new Product({
@@ -23,6 +49,12 @@ router.post('/', (req, res, next)=> {
         res.status(201).json({
             message: "post product request",
             createProduct: product
+            //OR
+            //createProduct: {
+                //_id: result._id,
+                // name: result.name,
+                // price: result.price,
+           // }
         });
     })
     .catch(err => {
@@ -48,9 +80,23 @@ router.get('/:productId', (req, res, next)=> {
 });
 
 router.patch('/:productId', (req, res, next)=> {
-    res.status(200).json({
-        message: "Updated"
-    });
+    const id = req.params.productId;
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+        
+    }
+    Product.update({_id: id}, {$set: updateOps})
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+   });
+   
 });
 
 router.delete('/:productId', (req, res, next)=> {
@@ -58,5 +104,7 @@ router.delete('/:productId', (req, res, next)=> {
         message: "Deleted"
     });
 });
+
+
 
 module.exports = router;

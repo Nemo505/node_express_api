@@ -10,6 +10,7 @@ mongoose.connect('mongodb+srv://'+
         '@cluster0.qnl2i0r.mongodb.net/?retryWrites=true&w=majority'      
 );
 
+mongoose.Promise = global.Promise;
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -48,5 +49,6 @@ app.use((error, req, res, next) => {
         }
     });
 })
+
 
 module.exports = app;
