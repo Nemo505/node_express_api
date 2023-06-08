@@ -2,7 +2,13 @@ const express = require('express');
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
+mongoose.connect('mongodb+srv://'+ 
+        process.env.MONGO_ATLAS_USER+':'+
+        process.env.MONGO_ATLAS_PW+
+        '@cluster0.qnl2i0r.mongodb.net/?retryWrites=true&w=majority'      
+);
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));

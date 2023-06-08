@@ -9,3 +9,5 @@ loginPackage
     npm install --save morgan
 To be in format/readable
     npm install --save body-parser
+
+npm install --save mongoose
