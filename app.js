@@ -14,6 +14,7 @@ mongoose.Promise = global.Promise;
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'))
 
 //Response Proper Header
 app.use((req, res, next) => {
