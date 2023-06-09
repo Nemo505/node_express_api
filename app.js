@@ -30,10 +30,12 @@ app.use((req, res, next) => {
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+const userRoutes = require('./api/routes/users');
 
 //Route Path
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use("/users", userRoutes);
 
 //Errors For all unknown routes
 app.use((req, res, next) => {

@@ -12,3 +12,4 @@ To be in format/readable
 
 npm install --save mongoose
 npm install --save multer
+npm install bcrypt
